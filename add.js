@@ -30,6 +30,8 @@ let formState = {
 
 
 const formVerification = () => {
+    const titleVerification = () => store.get().filter(item => item.title === formState.title);
+    console.log(titleVerification())
     if (formState.title === '' ||
         formState.year === '' ||
         formState.genre === '' ||
@@ -37,6 +39,10 @@ const formVerification = () => {
         document.querySelector("form p").textContent = "You cant send form with empty field"
     } else if (String(formState.year).length !== 4) {
         document.querySelector("form p").textContent = "The year field must contain 4 characters"
+
+    } else if (titleVerification().length !== 0) {
+        document.querySelector("form p").textContent = "Movie with that name already exists"
+
     } else {
         document.querySelector("form p").textContent = ''
     }
@@ -57,7 +63,6 @@ const addForm = () => {
             itemChildListItem.addEventListener('click', function (e) {
                 e.preventDefault()
                 formVerification()
-                console.log(formState.year.length)
                 let error = document.querySelector("form p").textContent;
 
                 if (error === '') {
