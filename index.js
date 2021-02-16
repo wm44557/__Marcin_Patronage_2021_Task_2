@@ -56,7 +56,6 @@ const appendChild = (tagName, innerHTML, className, itemFunction) => {
         itemChildListItem.innerHTML === "T" ? itemChildListItem.innerHTML = `<i class="far fa-eye"></i>` : itemChildListItem.innerHTML = `open movie`;
         itemChildListItem.addEventListener('click', function (e) {
             let datasetId = Number(e.target.parentElement.dataset.id)
-            console.log('tyrytyry')
             store.get().forEach((item, index) => item.id === datasetId ? render(datasetId, index, "seen") : null);
         })
     } else if (itemFunction === "delete") {
