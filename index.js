@@ -16,7 +16,8 @@ store.get(21)
 store.set({
     "id": 222,
     "title": "The xD Redemption",
-}, 3)
+}, 1)
+store.remove(222)
 
 const moviesCounterSeenFn = () => moviesData.filter(item => item.seen === 'T').length;
 

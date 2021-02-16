@@ -1,7 +1,7 @@
 export default class MoviesStorage {
     constructor() {
         let result = localStorage.getItem("movies");
-        if (result === null || !Array.isArray(result)) {
+        if (result === null || Array.isArray(result)) {
             localStorage.setItem("movies", JSON.stringify(moviesData));
         }
     }
@@ -32,6 +32,11 @@ export default class MoviesStorage {
         }
     }
 
+    remove(id) {
+        let array = this.get().filter((item) => item.id !== id);
+        localStorage.setItem("movies", JSON.stringify(array))
+
+    }
 
 }
 
