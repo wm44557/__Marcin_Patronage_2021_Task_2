@@ -19,7 +19,8 @@ html {
 body {
     font-size: 62.5%;
     background: rgb(63, 94, 251);
-    background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+    background-image: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+    background-image: -webkit-radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%)
 
 }
 
@@ -170,8 +171,8 @@ html {
 
 body {
     font-size: 62.5%;
-    background: rgb(63, 94, 251);
-    background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+    background-image: rgb(63, 94, 251);
+    background-image: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
 
 }
 
@@ -205,9 +206,8 @@ input {
     height: 40px;
     margin: 20px auto;
     align-items: center;
-    background: var(--backgroundColor);
-    box-shadow: 0 8px 32px 0 var(--boxShadowColor);
-    backdrop-filter: blur(8.0px);
+    background: transparent;
+    box-shadow: 2px 8px 32px 5px var(--boxShadowColor);
     border: none;
     text-decoration: none;
     border-radius: 5%;
@@ -285,7 +285,11 @@ button:focus {
     outline: none;
 }
 
-@media (max-width: 450px) {
+input:focus {
+    background: none;
+}
+
+@media (max-width: 650px) {
     #moviesCountersContainer {
         top: 5px;
         right: 5px;
