@@ -10,19 +10,18 @@ const dElement = {
 }
 
 const store = new MoviesStorage();
-let moviesData = store.get()
 
-store.get(21)
-store.set({
-    "id": 222,
-    "title": "The xD Redemption",
-}, 1)
-store.remove(222)
+// store.get(21)
+// store.set({
+//     "id": 222,
+//     "title": "The xD Redemption",
+// }, 1)
+// store.remove(222)
 
-const moviesCounterSeenFn = () => moviesData.filter(item => item.seen === 'T').length;
+const moviesCounterSeenFn = () => store.get().filter(item => item.seen === 'T').length;
 
 
-setCounterOfTo(moviesCounter, moviesData.length)
+setCounterOfTo(moviesCounter, store.get().length)
 setCounterOfTo(moviesSeenCounter, moviesCounterSeenFn(), 'MoviesSeen')
 
 dElement['moviesSeen'].textContent = String(moviesSeenCounter);
@@ -30,9 +29,10 @@ dElement['moviesCounter'].textContent = String(moviesCounter);
 
 
 const renderSeen = (datasetId, index) => {
-    moviesData[index].seen = "T"
+    store.get()[index].seen = "T"
     document.querySelector(`li[data-id='${datasetId}'] .seenDiv`).innerHTML = `<i class="far fa-eye"></i>`;
     setCounterOfTo(moviesSeenCounter, moviesCounterSeenFn(), 'MoviesSeen')
+    store.set(store.get()[index], datasetId)
     dElement['moviesSeen'].textContent = String(moviesSeenCounter);
 }
 
@@ -51,14 +51,14 @@ const appendChild = (tagName, innerHTML, className, itemSeen) => {
         itemChildListItem.innerHTML === "T" ? itemChildListItem.innerHTML = `<i class="far fa-eye"></i>` : itemChildListItem.innerHTML = `open movie`;
         itemChildListItem.addEventListener('click', function (e) {
             let datasetId = Number(e.target.parentElement.dataset.id)
-            moviesData.forEach((item, index) => item.id === datasetId ? renderSeen(datasetId, index) : null);
+            store.get().forEach((item, index) => item.id === datasetId ? renderSeen(datasetId, index) : null);
         })
     }
     newElement.appendChild(itemChildListItem);
 
 }
 
-moviesData.forEach(function (item, index) {
+store.get().forEach(function (item, index) {
         newElement = document.createElement('li');
         newElement.id = `list_item_${item.id}`;
         newElement.dataset.id = item.id;
