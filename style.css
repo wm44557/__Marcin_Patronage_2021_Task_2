@@ -118,6 +118,13 @@ li {
     margin-bottom: 20px;
 }
 
+.deleteDiv {
+    position: absolute;
+    font-size: 30px;
+    right: 30px;
+    top: 30px;
+    cursor: pointer;
+}
 
 li:hover {
     text-shadow: 7px 7px 7px var(--textShadowColor);
