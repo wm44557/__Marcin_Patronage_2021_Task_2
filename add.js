@@ -5,7 +5,8 @@ import {moviesCounter, moviesSeenCounter} from "./movies-counter.js";
 const dElement = {
     moviesSeen: document.getElementById('anotherMoviesCounterSeen'),
     moviesCounter: document.getElementById('anotherMoviesCounterAll'),
-    container: document.getElementById('formContainer')
+    container: document.getElementById('formContainer'),
+
 }
 
 let store = new MoviesStorage();
@@ -21,11 +22,24 @@ dElement['moviesCounter'].textContent = String(moviesCounter);
 let formState = {
     id: new Date().getUTCMilliseconds(),
     title: '',
-    year: 0,
+    year: '',
     genre: '',
     summary: '',
     seen: 'F'
 }
+
+
+const formVerification = () => {
+    if (formState.title === '' ||
+        formState.year === '' ||
+        formState.genre === '' ||
+        formState.summary === '') {
+        document.querySelector("form p").textContent = "You cant send form with empty field"
+    } else {
+        document.querySelector("form p").textContent = ''
+    }
+}
+
 
 const addForm = () => {
     const form = document.createElement('form');
@@ -40,8 +54,18 @@ const addForm = () => {
         if (listener === 'click') {
             itemChildListItem.addEventListener('click', function (e) {
                 e.preventDefault()
-                formState.id = new Date().getUTCMilliseconds();
-                store.set(formState)
+                formVerification()
+                let error = document.querySelector("form p").textContent;
+
+                if (error === '') {
+                    formState.id = new Date().getUTCMilliseconds();
+                    store.set(formState)
+                    setCounterOfTo(moviesCounter, store.get().length)
+                    dElement['moviesCounter'].textContent = String(moviesCounter);
+                    document.querySelectorAll("input").forEach(item => {
+                        item.value = ''
+                    })
+                }
             })
         }
 
@@ -49,10 +73,10 @@ const addForm = () => {
             itemChildListItem.addEventListener('input', function (e) {
                 const {value} = e.target;
                 placeholder === 'title' ? formState.title = value : null;
-                placeholder === 'year' ? formState.year = value : null;
+                placeholder === 'year' ? formState.year = Number(value) : null;
                 placeholder === 'genre' ? formState.genre = value : null;
                 placeholder === 'summary' ? formState.summary = value : null;
-                // document.querySelector("form p").textContent
+
             })
         }
         form.appendChild(itemChildListItem);
