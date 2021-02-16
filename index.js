@@ -9,13 +9,13 @@ const dElement = {
     moviesContainer: document.getElementById('moviesListContainer')
 }
 
-const store = new MoviesStorage();
+let store = new MoviesStorage();
 
 // store.get(21)
 // store.set({
 //     "id": 222,
 //     "title": "The xD Redemption",
-// }, 1)
+// }, 21)
 // store.remove(21)
 
 const moviesCounterSeenFn = () => store.get().filter(item => item.seen === 'T').length;
@@ -29,12 +29,14 @@ dElement['moviesCounter'].textContent = String(moviesCounter);
 
 
 const render = (datasetId, index, role) => {
-    if (role === "seen") {
-        store.get()[index].seen = "T"
-        document.querySelector(`li[data-id='${datasetId}'] .seenDiv`).innerHTML = `<i class="far fa-eye"></i>`;
+    if (role === 'seen') {
+        let old = store.get()[index]
+        old.seen = 'T';
+        store.set(old, datasetId)
         setCounterOfTo(moviesSeenCounter, moviesCounterSeenFn(), 'MoviesSeen')
-        store.set(store.get()[index], datasetId)
+        document.querySelector(`li[data-id='${datasetId}'] .seenDiv`).innerHTML = `<i class="far fa-eye"></i>`;
         dElement['moviesSeen'].textContent = String(moviesSeenCounter);
+
     } else if (role === "delete") {
         store.remove(datasetId)
         setCounterOfTo(moviesSeenCounter, store.get().length)
@@ -59,6 +61,7 @@ const appendChild = (tagName, innerHTML, className, itemFunction) => {
         itemChildListItem.innerHTML === "T" ? itemChildListItem.innerHTML = `<i class="far fa-eye"></i>` : itemChildListItem.innerHTML = `open movie`;
         itemChildListItem.addEventListener('click', function (e) {
             let datasetId = Number(e.target.parentElement.dataset.id)
+            console.log('tyrytyry')
             store.get().forEach((item, index) => item.id === datasetId ? render(datasetId, index, "seen") : null);
         })
     } else if (itemFunction === "delete") {
@@ -91,4 +94,3 @@ const renderList = () => {
 }
 
 renderList()
-
