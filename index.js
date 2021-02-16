@@ -11,7 +11,13 @@ const dElement = {
 
 const store = new MoviesStorage();
 let moviesData = store.get()
+
 store.get(21)
+store.set({
+    "id": 222,
+    "title": "The xD Redemption",
+}, 3)
+
 const moviesCounterSeenFn = () => moviesData.filter(item => item.seen === 'T').length;
 
 

@@ -15,6 +15,23 @@ export default class MoviesStorage {
         }
     }
 
+    set(data, id) {
+        if (arguments.length === 1) {
+            let oldArray = this.get()
+            oldArray.push(data)
+            localStorage.setItem("movies", JSON.stringify(oldArray))
+        } else if (arguments.length === 2) {
+            let updateItem = this.get()
+
+            updateItem.forEach((item, iterator) => {
+                if (item.id === id) {
+                    updateItem[iterator] = data
+                }
+            })
+            localStorage.setItem("movies", JSON.stringify(updateItem))
+        }
+    }
+
 
 }
 
