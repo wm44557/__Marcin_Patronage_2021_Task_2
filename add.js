@@ -35,6 +35,8 @@ const formVerification = () => {
         formState.genre === '' ||
         formState.summary === '') {
         document.querySelector("form p").textContent = "You cant send form with empty field"
+    } else if (String(formState.year).length !== 4) {
+        document.querySelector("form p").textContent = "The year field must contain 4 characters"
     } else {
         document.querySelector("form p").textContent = ''
     }
@@ -55,6 +57,7 @@ const addForm = () => {
             itemChildListItem.addEventListener('click', function (e) {
                 e.preventDefault()
                 formVerification()
+                console.log(formState.year.length)
                 let error = document.querySelector("form p").textContent;
 
                 if (error === '') {
