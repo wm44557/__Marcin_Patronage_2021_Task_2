@@ -1,25 +1,34 @@
 'use strict';
 import {moviesData} from "./data.js";
+import {setCounterOfTo} from "./movies-counter.js";
+import {moviesCounter, moviesSeenCounter} from "./movies-counter.js";
 
-const moviesCounterSeenDiv = document.getElementById('moviesCounterSeen');
-const moviesCounterAllDiv = document.getElementById('moviesCounterAll');
-const moviesListContainer = document.getElementById('moviesListContainer');
 
-let moviesCounter = moviesData.filter(item => item.seen === 'T');
+const dElement = {
+    moviesSeen: document.getElementById('moviesCounterSeen'),
+    moviesCounter: document.getElementById('moviesCounterAll'),
+    moviesContainer: document.getElementById('moviesListContainer')
+}
 
-moviesCounterAllDiv.textContent = String(moviesData.length);
-moviesCounterSeenDiv.textContent = String(moviesCounter.length);
+
+setCounterOfTo(moviesCounter, moviesData.length)
+
+const moviesCounterSeenFn = () => moviesData.filter(item => item.seen === 'T').length;
+setCounterOfTo(moviesSeenCounter, moviesCounterSeenFn(), 'MoviesSeen')
+
+dElement['moviesSeen'].textContent = String(moviesSeenCounter);
+dElement['moviesCounter'].textContent = String(moviesCounter);
 
 let newElement;
 let itemChildListItem;
 
+
 const renderSeen = (datasetId, index) => {
     moviesData[index].seen = "T"
-    // document.querySelector(`li[data-id='${datasetId}'] .seenDiv`).innerHTML = `T`;
     document.querySelector(`li[data-id='${datasetId}'] .seenDiv`).innerHTML = `<i class="far fa-eye"></i>`;
-    moviesCounter = moviesData.filter(item => item.seen === 'T');
-    console.log(moviesData)
-    moviesCounterSeenDiv.textContent = String(moviesCounter.length);
+    dElement['moviesSeen'].textContent = String(moviesCounterSeenFn());
+    setCounterOfTo(moviesCounter, 10)
+
 }
 
 
@@ -28,7 +37,6 @@ const appendChild = (tagName, innerHTML, className, itemSeen) => {
     itemChildListItem.innerHTML = innerHTML;
     className ? itemChildListItem.className = className : null;
     if (itemSeen) {
-        // itemChildListItem.innerHTML === "T" ? itemChildListItem.innerHTML = `T` : itemChildListItem.innerHTML = `F`;
         itemChildListItem.innerHTML === "T" ? itemChildListItem.innerHTML = `<i class="far fa-eye"></i>` : itemChildListItem.innerHTML = `open movie`;
         itemChildListItem.addEventListener('click', function (e) {
             let datasetId = Number(e.target.parentElement.dataset.id)
@@ -50,7 +58,7 @@ moviesData.forEach(function (item, index) {
         appendChild('p', item.summary, 'pSummary');
         appendChild('div', item.seen, 'seenDiv', true);
 
-        moviesListContainer.appendChild(newElement);
+        dElement['moviesContainer'].appendChild(newElement);
     }
 );
 
