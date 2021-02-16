@@ -299,3 +299,15 @@ input:focus {
     }
 
 }
+
+.link {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    text-decoration: underline;
+    font-size: 1.1rem;
+    position: absolute;
+    font-weight: 600;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+}

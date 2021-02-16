@@ -1,3 +1,4 @@
+'use Strict'
 import setCounterOfTo from "./movies-counter.js";
 import MoviesStorage from "./movies-storage.js";
 import {moviesCounter, moviesSeenCounter} from "./movies-counter.js";
@@ -6,7 +7,6 @@ const dElement = {
     moviesSeen: document.getElementById('anotherMoviesCounterSeen'),
     moviesCounter: document.getElementById('anotherMoviesCounterAll'),
     container: document.getElementById('formContainer'),
-
 }
 
 let store = new MoviesStorage();
@@ -31,7 +31,7 @@ let formState = {
 
 const formVerification = () => {
     const titleVerification = () => store.get().filter(item => item.title === formState.title);
-    console.log(titleVerification())
+
     if (formState.title === '' ||
         formState.year === '' ||
         formState.genre === '' ||
@@ -48,6 +48,7 @@ const formVerification = () => {
     }
 }
 
+// FORM GENERATOR
 
 const addForm = () => {
     const form = document.createElement('form');
@@ -103,3 +104,12 @@ const addForm = () => {
 
 addForm()
 
+
+// Navigation pages
+const a = document.createElement('a')
+const link = document.createTextNode("If you want back to movies list <-- click here")
+a.appendChild(link)
+a.className = "link"
+a.href = "index.html";
+
+document.body.appendChild(a)

@@ -20,6 +20,7 @@ const counterInitFromStore = (dElement) => {
     dElement['moviesSeen'].textContent = String(moviesSeenCounter);
     dElement['moviesCounter'].textContent = String(moviesCounter);
 }
+
 counterInitFromStore(dElement)
 
 
@@ -52,6 +53,7 @@ const appendChild = (tagName, innerHTML, className, itemFunction) => {
     itemChildListItem = document.createElement(tagName)
     itemChildListItem.innerHTML = innerHTML;
     className ? itemChildListItem.className = className : null;
+
     if (itemFunction === "seen") {
         itemChildListItem.innerHTML === "T" ? itemChildListItem.innerHTML = `<i class="far fa-eye"></i>` : itemChildListItem.innerHTML = `open movie`;
         itemChildListItem.addEventListener('click', function (e) {
@@ -70,7 +72,7 @@ const appendChild = (tagName, innerHTML, className, itemFunction) => {
 }
 
 const renderList = () => {
-    store.get().forEach(function (item, index) {
+    store.get().forEach(function (item) {
             newElement = document.createElement('li');
             newElement.id = `list_item_${item.id}`;
             newElement.dataset.id = item.id;
@@ -88,3 +90,12 @@ const renderList = () => {
 }
 
 renderList()
+
+// Navigation pages
+const a = document.createElement('a')
+const link = document.createTextNode("If you want add movie  <-- click here")
+a.className = "link"
+a.appendChild(link)
+a.href = "add.html";
+
+document.body.appendChild(a)
