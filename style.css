@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
+
+:root {
+    --backgroundColor: rgba(255, 255, 255, 0.10);
+    --boxShadowColor: rgba(31, 38, 135, 0.37);
+    --textShadowColor: rgba(256, 150, 150, 1);
+}
+
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    margin: 100px 0;
+}
+
+body {
+    font-size: 62.5%;
+    background: rgb(63, 94, 251);
+    background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+
+}
+
+#moviesCountersContainer {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 150px;
+    height: 150px;
+    border-radius: 30%;
+    background: var(--backgroundColor);
+    box-shadow: 0 8px 32px 0 var(--boxShadowColor);
+    backdrop-filter: blur(8.0px);
+    font-size: 2em;
+    color: white;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 10px;
+    z-index: 999;
+    -webkit-backdrop-filter: blur(8.0px);
+}
+
+#moviesCountersContainer p {
+    text-shadow: 4px 4px 5px var(--textShadowColor);
+}
+
+#moviesListContainer {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 60px auto;
+    padding: 2em;
+    border-radius: 5.5em;
+    background: var(--backgroundColor);
+    box-shadow: 0 8px 32px 0 var(--boxShadowColor);
+    backdrop-filter: blur(8.0px);
+    list-style: none;
+    -webkit-backdrop-filter: blur(8.0px);
+}
+
+li {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 80%;
+    margin: 15px auto;
+    padding: 40px 40px;
+    border-radius: 4.5em;
+    background: var(--backgroundColor);
+    box-shadow: 0 8px 32px 0 var(--boxShadowColor);
+    backdrop-filter: blur(8.0px);
+    -webkit-backdrop-filter: blur(8.0px);
+}
+
+.h2Title {
+    font-size: 3em;
+    padding: 25px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 40%;
+    font-weight: 400;
+}
+
+.pYear {
+    font-size: 1.5em;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 5%;
+    padding-right: 9px;
+}
+
+.pSummary {
+    font-size: 1.5em;
+    font-weight: 300;
+    text-align: justify;
+    padding-top: 20px;
+}
+
+.fa-eye {
+    position: absolute;
+    font-size: 4em;
+    color: white;
+    top: 20px;
+    left: 20px;
+}
+
+.seenDiv {
+    text-decoration: underline;
+    cursor: pointer;
+    height: 0;
+    font-size: 1.5em;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+
+li:hover {
+    text-shadow: 7px 7px 7px var(--textShadowColor);
+}
+
+@media (max-width: 600px ) {
+    .h2Title {
+        padding: 3px;
+        font-size: 1.5em;
+    }
+
+    li {
+        width: 95%;
+    }
+
+    #moviesListContainer {
+        width: 85%;
+    }
+
+    .fa-eye {
+        font-size: 2.5em;
+    }
+
+}
+
