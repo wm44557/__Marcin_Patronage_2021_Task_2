@@ -311,3 +311,15 @@ input:focus {
     left: 50%;
     transform: translateX(-50%);
 }
+
+@media (max-width: 490px) {
+    .link {
+        font-size: 0.8rem;
+        top: 40px;
+    }
+
+    form {
+        max-height: 600px;
+        top: 55%;
+    }
+}
