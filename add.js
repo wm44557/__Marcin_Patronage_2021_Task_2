@@ -91,7 +91,7 @@ const addForm = () => {
         form.appendChild(itemChildListItem);
     }
 
-    appendChild('h1', 'Add film');
+    appendChild('h1', 'Add movie');
     appendChild('input', formState.title, 'title', 'change', 'text');
     appendChild('input', formState.year, 'year', 'change', 'number');
     appendChild('input', formState.genre, 'genre', 'change', 'text');
