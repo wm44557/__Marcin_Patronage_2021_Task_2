@@ -227,7 +227,7 @@ form p {
 }
 
 form button {
-    height: 20px;
+    height: 50px;
 }
 
 textarea:focus, input:focus {
