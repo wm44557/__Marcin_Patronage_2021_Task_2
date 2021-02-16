@@ -11,21 +11,16 @@ const dElement = {
 
 let store = new MoviesStorage();
 
-// store.get(21)
-// store.set({
-//     "id": 222,
-//     "title": "The xD Redemption",
-// }, 21)
-// store.remove(21)
+export const moviesCounterSeenFn = () => store.get().filter(item => item.seen === 'T').length;
 
-const moviesCounterSeenFn = () => store.get().filter(item => item.seen === 'T').length;
+const counterInitFromStore = (dElement) => {
+    setCounterOfTo(moviesCounter, store.get().length)
+    setCounterOfTo(moviesSeenCounter, moviesCounterSeenFn(), 'MoviesSeen')
 
-
-setCounterOfTo(moviesCounter, store.get().length)
-setCounterOfTo(moviesSeenCounter, moviesCounterSeenFn(), 'MoviesSeen')
-
-dElement['moviesSeen'].textContent = String(moviesSeenCounter);
-dElement['moviesCounter'].textContent = String(moviesCounter);
+    dElement['moviesSeen'].textContent = String(moviesSeenCounter);
+    dElement['moviesCounter'].textContent = String(moviesCounter);
+}
+counterInitFromStore(dElement)
 
 
 const render = (datasetId, index, role) => {
