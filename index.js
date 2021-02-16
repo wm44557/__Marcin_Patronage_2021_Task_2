@@ -1,8 +1,8 @@
 'use strict';
 import {moviesData} from "./data.js";
-import {setCounterOfTo} from "./movies-counter.js";
+import setCounterOfTo from "./movies-counter.js";
+import MoviesStorage from "./movies-storage.js";
 import {moviesCounter, moviesSeenCounter} from "./movies-counter.js";
-
 
 const dElement = {
     moviesSeen: document.getElementById('moviesCounterSeen'),
@@ -10,26 +10,29 @@ const dElement = {
     moviesContainer: document.getElementById('moviesListContainer')
 }
 
+const moviesCounterSeenFn = () => moviesData.filter(item => item.seen === 'T').length;
+
+const obj = new MoviesStorage();
 
 setCounterOfTo(moviesCounter, moviesData.length)
-
-const moviesCounterSeenFn = () => moviesData.filter(item => item.seen === 'T').length;
 setCounterOfTo(moviesSeenCounter, moviesCounterSeenFn(), 'MoviesSeen')
 
 dElement['moviesSeen'].textContent = String(moviesSeenCounter);
 dElement['moviesCounter'].textContent = String(moviesCounter);
 
-let newElement;
-let itemChildListItem;
-
 
 const renderSeen = (datasetId, index) => {
     moviesData[index].seen = "T"
     document.querySelector(`li[data-id='${datasetId}'] .seenDiv`).innerHTML = `<i class="far fa-eye"></i>`;
-    dElement['moviesSeen'].textContent = String(moviesCounterSeenFn());
-    setCounterOfTo(moviesCounter, 10)
-
+    setCounterOfTo(moviesSeenCounter, moviesCounterSeenFn(), 'MoviesSeen')
+    dElement['moviesSeen'].textContent = String(moviesSeenCounter);
 }
+
+
+// LIST ELEMENTS GENERATOR
+
+let newElement;
+let itemChildListItem;
 
 
 const appendChild = (tagName, innerHTML, className, itemSeen) => {
