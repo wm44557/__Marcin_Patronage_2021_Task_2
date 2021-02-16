@@ -3,9 +3,19 @@ export default class MoviesStorage {
         let result = localStorage.getItem("movies");
         if (result === null || !Array.isArray(result)) {
             localStorage.setItem("movies", JSON.stringify(moviesData));
-            console.log('OK')
         }
     }
+
+    get(id) {
+        if (arguments.length === 0) {
+            return JSON.parse(localStorage.getItem("movies"));
+        } else if (arguments.length === 1) {
+            let element = this.get().filter((item) => item.id === id);
+            console.log(element)
+        }
+    }
+
+
 }
 
 const moviesData = [

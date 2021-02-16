@@ -1,5 +1,4 @@
 'use strict';
-import {moviesData} from "./data.js";
 import setCounterOfTo from "./movies-counter.js";
 import MoviesStorage from "./movies-storage.js";
 import {moviesCounter, moviesSeenCounter} from "./movies-counter.js";
@@ -10,9 +9,11 @@ const dElement = {
     moviesContainer: document.getElementById('moviesListContainer')
 }
 
+const store = new MoviesStorage();
+let moviesData = store.get()
+store.get(21)
 const moviesCounterSeenFn = () => moviesData.filter(item => item.seen === 'T').length;
 
-const obj = new MoviesStorage();
 
 setCounterOfTo(moviesCounter, moviesData.length)
 setCounterOfTo(moviesSeenCounter, moviesCounterSeenFn(), 'MoviesSeen')
